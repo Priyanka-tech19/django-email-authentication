@@ -1,0 +1,31 @@
+{% extends 'accounts/layout.html' %}
+{% block content %}
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class ="card shadow p-4 rounded-4 w-100" style="max-width: 450px;">
+        <h2 class ="text-center text-primary mb-3"> Update Profile Picture </h2>
+        <hr>
+
+        <div class ="text-center mb-3">
+            <img src="{{profile.profile_pic.url }}"
+            class="rounded-circle shadow"
+            width="120" height="120"
+            style="object-fit:cover;">
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success"> Save Changes </button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href ="{% url 'dashboard' %}">⬅ Back to Dashboard</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+        

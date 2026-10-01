@@ -1,0 +1,47 @@
+{% extends 'accounts/layout.html' %}
+{% block content %}
+
+<div class ="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow p-4 rounded-4 w-100" style="max-width: 450px;">
+        <h2 class="text-center mb-4 text-primary"> Sign Up </h2>
+
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method ="POST" action ="{% url 'register' %}">
+            {% csrf_token %}
+
+
+        <!--Username-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" placeholder="Username" name="{{ form.username.name}}" value="{{form.username.value|default:'' }}">
+                <label for ="username"> Username</label>
+                <span class="text-danger">{{form.username.errors}}</span>
+            </div>
+            <!--email-->
+            <div class="form-floating mb-3">
+                <input type ="email" class="form-control" id="email" placeholder="Email" name="{{form.email.name}}" value="{{form.email.value|default:''}}">
+                <label for ="email"> Email </label>
+                <span class="text-danger"> {{form.email.errors}}</span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password1" placeholder="Password" name="{{form.password1.name}}">
+                <label for="password1">Password</label>
+                <span class="text-danger"> {{form.password1.errors}}</span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password2" placeholder="Confirm Password" name="{{ form.password2.name}}">
+                <label for="password2"> Confirm Password </label>
+                <span class="text-danger">{{form.password2.errors}}</span>
+            </div>
+
+            <button type="submit" class= "btn btn-primary  w-100 mb-3"> Sign Up</button>
+            <p class="text-center"> Already have an account? <a href="{% url 'login' %}"> Login</a></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
